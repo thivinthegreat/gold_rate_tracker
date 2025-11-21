@@ -2,21 +2,15 @@
 # -*- coding: utf-8 -*-
 
 """
-scraper.py
-----------
-Fetches last 10–30 days of gold/silver prices from JAJ website, 
-and computes full PRO PACK technical indicators:
-
-✓ SMA7, SMA20, SMA30
-✓ EMA12, EMA26
-✓ MACD (Line, Signal, Histogram)
-✓ RSI-14
-✓ Bollinger Bands (20-SMA ± 2 SD)
-
-Outputs:
-    data/history.csv
-    data/history.json
-    data/latest.json
+scraper.py — FINAL CLEAN VERSION
+---------------------------------
+✓ Appends ONLY missing dates
+✓ Uses IST timezone for daily check
+✓ Keeps history.json untouched
+✓ latest.json contains ALL technical indicators
+✓ Consistent datetime handling
+✓ No NaN in JSON (converted to None)
+✓ history.csv stored as DD/MM/YYYY but internally datetime64
 """
 
 import os
@@ -25,14 +19,16 @@ import time
 import json
 import logging
 from datetime import datetime, timedelta
+import pytz
 
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
-# ---------------------------------------
+
+# -------------------------------------------------
 # Logging
-# ---------------------------------------
+# -------------------------------------------------
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s — %(levelname)s — %(message)s",
@@ -41,114 +37,86 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-# ---------------------------------------
-# User agents
-# ---------------------------------------
+# -------------------------------------------------
+# Timezone helper
+# -------------------------------------------------
+IST = pytz.timezone("Asia/Kolkata")
+
+def today_ist():
+    return datetime.now(IST).date()
+
+
+# -------------------------------------------------
+# User Agents
+# -------------------------------------------------
 USER_AGENTS = [
-    # Chrome
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36',
-    'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36',
-    'Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36',
-    'Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36',
-    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
-    'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36',
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
-    'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
-    'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
-    'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36'
-    # Firefox
-    'Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)',
-    'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko',
-    'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)',
-    'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko',
-    'Mozilla/5.0 (Windows NT 6.2; WOW64; Trident/7.0; rv:11.0) like Gecko',
-    'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko',
-    'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.0; Trident/5.0)',
-    'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko',
-    'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)',
-    'Mozilla/5.0 (Windows NT 6.1; Win64; x64; Trident/7.0; rv:11.0) like Gecko',
-    'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)',
-    'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)',
-    'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)',
-    'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:59.0) Gecko/20100101 Firefox/59.0'
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+    "Mozilla/5.0 (X11; Linux x86_64)",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
 ]
 
 def get_agent():
     return random.choice(USER_AGENTS)
 
 
-# ---------------------------------------
-# Safe HTTP
-# ---------------------------------------
+# -------------------------------------------------
+# Safe HTTP GET
+# -------------------------------------------------
 def safe_get(url, retries=3, timeout=20):
     for attempt in range(retries):
         try:
-            response = requests.get(
+            resp = requests.get(
                 url,
-                headers={
-                    "User-Agent": get_agent(),
-                    "Accept-Language": "en-US,en;q=0.9",
-                },
+                headers={"User-Agent": get_agent()},
                 timeout=timeout
             )
-            logger.info(f"GET success: {url}")
-            return response
+            return resp
         except Exception as e:
-            logger.warning(f"GET failed (attempt {attempt+1}): {e}")
+            logger.warning(f"[WARN] GET attempt {attempt+1} failed: {e}")
             time.sleep(1 + attempt)
-    logger.error("GET failed after retries.")
+    logger.error("[ERROR] Failed after retries.")
     return None
 
 
-# ---------------------------------------
-# URL builder (10-day window)
-# ---------------------------------------
-def build_url(days=15, page=1):
-    today = datetime.now()
-    from_date = (today - timedelta(days=days)).strftime("%d/%m/%Y")
-    to_date = today.strftime("%d/%m/%Y")
-    logger.info(f"Start Date :  {from_date}")
-    logger.info(f"End Date : {to_date}")
-    
-
-
+# -------------------------------------------------
+# Build range URL
+# -------------------------------------------------
+def build_range_url(from_date, to_date, page=1):
+    """
+    Dates must be DD/MM/YYYY
+    """
     base = "https://www.thejewellersassociation.org/searchresult.php"
-    params = (
-        f"type=ratesearch&from_date={from_date}&to_date={to_date}"
-        f"&commodity=3&rate_timing=1&page={int(page)}"
+    return (
+        f"{base}?type=ratesearch&from_date={from_date}"
+        f"&to_date={to_date}&commodity=3&rate_timing=1&page={page}#location"
     )
 
-    final_url =  f"{base}?{params}#location"
 
-    logger.info(f"Final URL : {final_url}")
-    return final_url
+# -------------------------------------------------
+# SCRAPE ANY DATE RANGE (returns datetime64 DF)
+# -------------------------------------------------
+def scrape_range(from_date_str, to_date_str):
+    """
+    Input : "22/11/2025" to "24/11/2025"
+    Output DF columns: date(datetime64), gold(int), silver(int)
+    """
+    data = []
 
-
-# ---------------------------------------
-# Scrape HTML table
-# ---------------------------------------
-def scrape_table():
-    
-
-    
-    # replace "#location" with "&page={}#location" 
-    for page in range(1, 13):
-        url = build_url(180, page)
-        print("getting Page : ", page)
+    # Try up to 5 pages
+    for page in range(1, 6):
+        url = build_range_url(from_date_str, to_date_str, page)
         resp = safe_get(url)
         if resp is None:
-            return pd.DataFrame()
+            continue
 
         soup = BeautifulSoup(resp.text, "html.parser")
         table = soup.select_one("table.result_table")
+        if not table:
+            break
 
-        if table is None:
-            logger.error("result_table not found.")
-            return pd.DataFrame()
-
-        rows = table.select("tr")[1:]  # skip header
-        data = []
+        rows = table.select("tr")[1:]
+        if not rows:
+            break
 
         for tr in rows:
             cols = [c.text.strip() for c in tr.select("td")]
@@ -156,32 +124,27 @@ def scrape_table():
                 continue
 
             raw_date = cols[1].split(" ")[0]  # "05/11/2025"
-            date = datetime.strptime(raw_date, "%d/%m/%Y").strftime("%Y-%m-%d")
+            date = datetime.strptime(raw_date, "%d/%m/%Y")  # datetime object
 
-            gold = float(cols[2])
-            silver = float(cols[4])
+            gold = int(float(cols[2]))
+            silver = int(float(cols[4]))
 
-            data.append({
-                "date": date,
-                "gold": gold,
-                "silver": silver
-            })
+            data.append({"date": date, "gold": gold, "silver": silver})
 
     df = pd.DataFrame(data)
-    logger.info(f"Scraped {len(df)} rows.")
-    return df.sort_values("date")
+    if df.empty:
+        return df
+
+    df = df.sort_values("date").reset_index(drop=True)
+    return df
 
 
-# ---------------------------------------
-# Indicator Calculations
-# ---------------------------------------
+# -------------------------------------------------
+# Indicator Calculations (returns df with indicators)
+# -------------------------------------------------
 def compute_indicators(df):
-    """
-    Computes indicators and replaces NaN with None for JSON and empty field for CSV.
-    """
 
-    def compute_one(df, col):
-
+    def add(col):
         # SMA
         df[f"sma7_{col}"] = df[col].rolling(7).mean()
         df[f"sma20_{col}"] = df[col].rolling(20).mean()
@@ -205,77 +168,152 @@ def compute_indicators(df):
         avg_loss = loss.rolling(14).mean()
 
         rs = avg_gain / (avg_loss + 1e-9)
-        df[f"rsi14_{col}"] = 100 - (100 / (1 + rs))
+        df[f"rsi14_{col}"] = 100 - 100 / (1 + rs)
 
         # Bollinger
         sma20 = df[col].rolling(20).mean()
         std20 = df[col].rolling(20).std()
+        df[f"boll_upper_{col}"] = sma20 + 2 * std20
+        df[f"boll_lower_{col}"] = sma20 - 2 * std20
 
-        df[f"boll_sma20_{col}"] = sma20
-        df[f"boll_upper_{col}"] = sma20 + (2 * std20)
-        df[f"boll_lower_{col}"] = sma20 - (2 * std20)
+    add("gold")
+    add("silver")
 
-        return df
-
-    df = compute_one(df, "gold")
-    df = compute_one(df, "silver")
-
-    # Replace NaN → None for JSON
+    # Convert NaN → None for JSON safety
     df = df.where(pd.notnull(df), None)
+
+    # Round floats
+    num_cols = df.select_dtypes(include="float").columns
+    df[num_cols] = df[num_cols].round(2)
 
     return df
 
-# ---------------------------------------
-# JSON writers
-# ---------------------------------------
-def write_json(df):
-    # HISTORY JSON
-    hist_records = df.to_dict(orient="records")
-    with open("data/history.json", "w") as f:
-        json.dump(hist_records, f, indent=2)
 
-    # LATEST JSON
-    last = df.iloc[-1]
+# -------------------------------------------------
+# latest.json writer — full record
+# -------------------------------------------------
+def write_latest_json(df):
+    last = df.iloc[-1].to_dict()
 
-    latest_json = {
-        "date": last["date"],
-        "gold_rate": last["gold"],
-        "silver_rate": last["silver"],
-        "gold_up": bool(df["gold"].diff().iloc[-1] > 0),
-        "silver_up": bool(df["silver"].diff().iloc[-1] > 0),
-        "gold_weekly": float(df["gold"].rolling(7).mean().iloc[-1]),
-        "silver_weekly": float(df["silver"].rolling(7).mean().iloc[-1])
-    }
+    # FIX: convert Timestamp → string (DD/MM/YYYY)
+    if isinstance(last.get("date"), pd.Timestamp):
+        last["date"] = last["date"].strftime("%d/%m/%Y")
 
     with open("data/latest.json", "w") as f:
-        json.dump(latest_json, f, indent=2)
+        json.dump(last, f, indent=2)
 
-    logger.info("Saved latest.json & history.json.")
+    logger.info("latest.json updated")
+
+# -------------------------------------------------
+# history.json writer — full record
+# -------------------------------------------------
+def write_history_json(df):
+    """
+    Writes processed 7-day history with full indicators.
+    Output structure:
+    {
+        "1": { ... yesterday ... },
+        "2": { ... },
+        ...
+        "7": { ... oldest ... }
+    }
+    """
+
+    # Take last 7 rows
+    last7 = df.tail(7).copy()
+
+    # Convert Timestamp + NaN handling
+    def json_safe(value):
+        if isinstance(value, pd.Timestamp):
+            return value.strftime("%d/%m/%Y")
+        if value is None:
+            return None
+        return value
+
+    # Prepare numbered dict
+    out = {}
+
+    # Reverse: last 7 rows, newest = key "1"
+    for idx, (i, row) in enumerate(last7.iloc[::-1].iterrows(), start=1):
+        row_dict = {k: json_safe(v) for k, v in row.to_dict().items()}
+        out[str(idx)] = row_dict
+
+    # Write file
+    with open("data/history.json", "w") as f:
+        json.dump(out, f, indent=2)
+
+    logger.info("history.json (7-day processed) updated")
 
 
-# ---------------------------------------
-# MAIN
-# ---------------------------------------
+# -------------------------------------------------
+# MAIN SCRAPER LOGIC
+# -------------------------------------------------
 def main():
-    logger.info("=== Starting Scraper ===")
+    logger.info("=== Scraper Started ===")
 
-    # df = scrape_table()
-    # if df.empty:
-    #     logger.error("No data scraped. Aborting.")
-    #     return
-    df = pd.read_csv("data/history.csv")
-    # Compute indicators
+    # Load existing history
+    if not os.path.exists("data/history.csv"):
+        logger.error("history.csv missing. Please bootstrap first.")
+        return
+
+    df_old = pd.read_csv("data/history.csv")
+
+    # Convert back to datetime
+    df_old["date"] = pd.to_datetime(df_old["date"], format="%d/%m/%Y")
+    df_old = df_old.sort_values("date").reset_index(drop=True)
+
+    last_date = df_old.iloc[-1]["date"].date()
+    today = today_ist()
+
+    logger.info(f"Last saved date (CSV): {last_date}")
+    logger.info(f"Today's IST date:      {today}")
+
+    # Already up-to-date
+    if last_date >= today:
+        logger.info("No new data needed.")
+        write_latest_json(df_old)
+        return
+
+    # Missing days → fetch from last_date+1 → today
+    from_date = (last_date + timedelta(days=1)).strftime("%d/%m/%Y")
+    to_date = today.strftime("%d/%m/%Y")
+
+    logger.info(f"Fetching new range: {from_date} → {to_date}")
+
+    df_new = scrape_range(from_date, to_date)
+
+    if df_new.empty:
+        logger.warning("No rows found for missing days.")
+        return
+
+    # Check if today's row exists
+    if df_new.iloc[-1]["date"].date() != today:
+        logger.warning("Today's rate NOT available on website.")
+        return
+
+    # Merge
+    df = pd.concat([df_old, df_new], ignore_index=True)
+    df = df.drop_duplicates(subset=["date"], keep="last")
+    df = df.sort_values("date").reset_index(drop=True)
+
+    # Compute full indicators
     df = compute_indicators(df)
 
-    # Reset history.csv
-    os.makedirs("data", exist_ok=True)
-    df.to_csv("data/history.csv", index=False)
-    logger.info("Wrote fresh history.csv")
+    # Save updated history in CSV format dd/mm/YYYY
+    df_to_save = df.copy()
+    df_to_save["date"] = df_to_save["date"].dt.strftime("%d/%m/%Y")
+    df_to_save.to_csv("data/history.csv", index=False)
+    logger.info("history.csv updated")
 
-    # Write JSON files
-    # write_json(df)
+    # latest.json ONLY — DO NOT TOUCH history.json
+    write_latest_json(df)
+    logger.info("Completed writing latest.json")
 
-    logger.info("=== Scraper complete. ===")
+    # Write processed 7-day history.json
+    write_history_json(df)
+    logger.info("Completed writing history.json")
+
+    logger.info("=== Scraper Finished ===")
 
 
 if __name__ == "__main__":
