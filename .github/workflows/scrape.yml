@@ -1,0 +1,76 @@
+name: Update Gold & Silver Data
+
+on:
+  schedule:
+    - cron: "30 5 * * *"    # 11:00 AM IST
+    - cron: "30 11 * * *"   # 5:00 PM IST
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # 1. Checkout repo
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # 2. Setup Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # 4. Run scraper
+      - name: Run scraper
+        id: scraper
+        run: |
+          echo "Running scraper..."
+          python scraper.py
+          echo "Scraper exit code: $?"
+
+          # Check if git shows any modifications
+          if git diff --quiet
+          then
+            echo "changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      # 5. Generate HTML (ONLY if changes occurred)
+      - name: Generate static HTML
+        if: steps.scraper.outputs.changes == 'true'
+        run: |
+          echo "Changes detected — generating HTML"
+          python generate_html.py
+
+      # 6. Commit updates if needed
+      - name: Commit changes
+        if: steps.scraper.outputs.changes == 'true'
+        run: |
+          git config --local user.email "github-actions@github.com"
+          git config --local user.name "GitHub Actions"
+
+          git add data/history.csv || true
+          git add data/latest.json || true
+          git add data/history.json || true
+          git add data/decision.json || true
+          git add index.html || true
+          git add assets/js/script.js || true
+          git add assets/css/style.css || true
+
+          git commit -m "Auto-update data $(date)" || echo "No changes"
+
+      # 7. Push changes
+      - name: Push changes
+        if: steps.scraper.outputs.changes == 'true'
+        uses: ad-m/github-push-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
