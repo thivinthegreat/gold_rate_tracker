@@ -245,6 +245,160 @@ def write_history_json(df):
     logger.info("history.json (7-day processed) updated")
 
 
+def safe_pct(a, b):
+    """Returns percent difference a vs b safely."""
+    try:
+        return round((a - b) / b * 100, 2)
+    except:
+        return None
+
+
+def bollinger_position(price, lower, upper):
+    """Return where price lies between Bollinger bands (0–100%)."""
+    if lower is None or upper is None or upper == lower:
+        return None
+    try:
+        return round((price - lower) * 100 / (upper - lower), 2)
+    except:
+        return None
+
+def compute_buy_analysis_for(df, metal: str):
+    """
+    Computes buy metrics for either 'gold' or 'silver'.
+    metal = 'gold' or 'silver'
+    """
+
+    last = df.iloc[-1]
+    price = last[metal]
+
+    # Indicator column keys
+    sma7 = last.get(f"sma7_{metal}")
+    sma30 = last.get(f"sma30_{metal}")
+    sma20 = last.get(f"sma20_{metal}")
+
+    rsi = last.get(f"rsi14_{metal}")
+    boll_lower = last.get(f"boll_lower_{metal}")
+    boll_upper = last.get(f"boll_upper_{metal}")
+
+    # Percentage differences
+    weekly_diff = safe_pct(price, sma7) if sma7 else None
+    monthly_diff = safe_pct(price, sma30) if sma30 else None
+    sma20_dist = safe_pct(price, sma20) if sma20 else None
+    boll_pos = bollinger_position(price, boll_lower, boll_upper)
+
+    # -------------------------
+    # BUY SCORE + REASONING
+    # -------------------------
+    score = 0
+    reasoning = []
+
+    # Weekly AVG
+    if weekly_diff is not None:
+        if weekly_diff < -1:
+            score += 20; reasoning.append("Price is well below weekly average.")
+        elif weekly_diff < 0:
+            score += 10; reasoning.append("Price is slightly below weekly average.")
+        else:
+            reasoning.append("Price is above weekly average.")
+
+    # Monthly AVG
+    if monthly_diff is not None:
+        if monthly_diff < -1:
+            score += 20; reasoning.append("Price is well below monthly average.")
+        elif monthly_diff < 0:
+            score += 10; reasoning.append("Price is slightly below monthly average.")
+        else:
+            reasoning.append("Price is above monthly average.")
+
+    # RSI
+    if rsi is not None:
+        if rsi <= 30:
+            score += 25; reasoning.append("RSI indicates oversold conditions.")
+        elif rsi < 45:
+            score += 10; reasoning.append("RSI mildly undervalued.")
+        elif rsi <= 60:
+            reasoning.append("RSI neutral.")
+        else:
+            reasoning.append("RSI indicates overbought conditions.")
+
+    # Bollinger
+    if boll_pos is not None:
+        if boll_pos < 20:
+            score += 20; reasoning.append("Near lower Bollinger band (cheap zone).")
+        elif boll_pos < 40:
+            score += 10; reasoning.append("Lower half of Bollinger range.")
+        elif boll_pos <= 60:
+            reasoning.append("Mid Bollinger range (fair).")
+        else:
+            reasoning.append("Near upper Bollinger band (expensive).")
+
+    # SMA20
+    if sma20_dist is not None:
+        if sma20_dist < -1:
+            score += 15; reasoning.append("Price below SMA20 (undervalued trend).")
+        elif sma20_dist < 0:
+            score += 8; reasoning.append("Slightly below SMA20.")
+        else:
+            reasoning.append("Above SMA20 (higher valuation).")
+
+    # Fallback
+    if not reasoning:
+        reasoning.append("Neutral signals; no strong buy/sell indicators.")
+
+    score = min(100, max(0, score))
+
+    # Recommendation
+    if score >= 75:
+        rec = "Good Time To Buy"
+    elif score >= 55:
+        rec = "Fair Price"
+    elif score >= 40:
+        rec = "Slightly Expensive"
+    else:
+        rec = "Avoid (Expensive)"
+
+    # Final dict
+    return {
+        "date": last["date"].strftime("%d/%m/%Y"),
+        "price": to_native(price),
+        "weekly_avg": to_native(sma7),
+        "monthly_avg": to_native(sma30),
+        "weekly_difference_pct": to_native(weekly_diff),
+        "monthly_difference_pct": to_native(monthly_diff),
+        "sma20_distance_pct": to_native(sma20_dist),
+        "boll_position_pct": to_native(boll_pos),
+        "rsi14": to_native(rsi),
+        "buy_score": to_native(score),
+        "recommendation": rec,
+        "reasoning": " ".join(reasoning)
+    }
+
+
+def to_native(obj):
+    """
+    Convert numpy/pandas types → native Python types for safe JSON dumping.
+    """
+    if isinstance(obj, dict):
+        return {k: to_native(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [to_native(i) for i in obj]
+    if hasattr(obj, "item"):
+        # numpy scalar
+        return obj.item()
+    return obj
+
+
+def write_decision_json(gold_analysis, silver_analysis):
+    data = {
+        "gold": gold_analysis,
+        "silver": silver_analysis
+    }
+    clean = to_native(data)
+    with open("data/decision.json", "w") as f:
+        json.dump(clean, f, indent=2)
+    logger.info("decision.json updated (gold + silver).")
+
+
 # -------------------------------------------------
 # MAIN SCRAPER LOGIC
 # -------------------------------------------------
@@ -304,6 +458,14 @@ def main():
     df_to_save["date"] = df_to_save["date"].dt.strftime("%d/%m/%Y")
     df_to_save.to_csv("data/history.csv", index=False)
     logger.info("history.csv updated")
+
+    # --- Buy Analysis Engine ---
+    # --- Compute buy analysis for both metals ---
+    gold_analysis = compute_buy_analysis_for(df, "gold")
+    silver_analysis = compute_buy_analysis_for(df, "silver")
+
+    write_decision_json(gold_analysis, silver_analysis)
+
 
     # latest.json ONLY — DO NOT TOUCH history.json
     write_latest_json(df)

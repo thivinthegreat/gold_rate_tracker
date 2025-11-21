@@ -23,7 +23,22 @@
         window.dashboardSummary = {"gold_price": 11460, "silver_price": 169, "gold_prev": 11500, "silver_prev": 173, "gold_change": -40, "silver_change": -4, "gold_pct": -0.35, "silver_pct": -2.31, "gold_dir": "down", "silver_dir": "down", "gold_weekly": 11541.43, "silver_weekly": 173.29};
     </script>
 
+    <!-- HEADER -->
+    <header class="header-bar mb-6">
+        <div class="max-w-7xl mx-auto flex items-center justify-between py-4 px-3">
+            <h1 class="header-title">Gold & Silver Dashboard</h1>
+            <a href="https://github.com/thivinthegreat/gold_rate_tracker"
+            target="_blank" class="github-link">
+                View on GitHub →
+            </a>
+        </div>
+    </header>
+
     <div id="app" class="max-w-7xl mx-auto">
+
+        <div id="topLatestUpdate" class="top-latest-update">
+        📅 Latest Update: --
+     </div>
         
         <!-- ======== BANNERS ======== -->
         <div id="bannerSection" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8"></div>
@@ -55,11 +70,77 @@
             </div>
         </div>
 
+        <!-- ===========================
+            BUY INSIGHTS (GOLD & SILVER)
+        ============================== -->
+        <section id="buy-insights" class="insights-section">
+
+            <div class="insight-header-bar">
+                <h2 class="insights-title">Buy Insight Analysis</h2>
+                <div id="latestDate" class="latest-date">Latest Date: --</div>
+            </div>
+
+            <div class="metal-pair">
+
+                <!-- GOLD TILE -->
+                <div class="metal-tile">
+                    <h3 class="metal-header gold-header">Gold Analysis</h3>
+                    
+                    <div class="score-card">
+                        <div class="score-value" id="goldScoreValue">--</div>
+                        <div class="meter-bar"><div class="meter-fill" id="goldMeterFill"></div></div>
+                        <div class="rec-text" id="goldRecommendation">--</div>
+                    </div>
+
+                    <div class="metrics-grid">
+                        <div class="metric"><span>Weekly Avg</span><strong id="goldWeeklyAvg">--</strong><small id="goldWeeklyDiff">--</small></div>
+                        <div class="metric"><span>Monthly Avg</span><strong id="goldMonthlyAvg">--</strong><small id="goldMonthlyDiff">--</small></div>
+                        <div class="metric"><span>RSI 14</span><strong id="goldRSI">--</strong></div>
+                        <div class="metric"><span>Bollinger</span><strong id="goldBoll">--</strong></div>
+                        <div class="metric"><span>SMA20 Dist</span><strong id="goldSMA20">--</strong></div>
+                    </div>
+
+                    <details class="reasoning-box">
+                        <summary>Detailed Reasoning</summary>
+                        <p id="goldReasoning"></p>
+                    </details>
+                </div>
+
+                <!-- SILVER TILE -->
+                <div class="metal-tile">
+                    <h3 class="metal-header silver-header">Silver Analysis</h3>
+                    
+                    <div class="score-card">
+                        <div class="score-value" id="silverScoreValue">--</div>
+                        <div class="meter-bar"><div class="meter-fill" id="silverMeterFill"></div></div>
+                        <div class="rec-text" id="silverRecommendation">--</div>
+                    </div>
+
+                    <div class="metrics-grid">
+                        <div class="metric"><span>Weekly Avg</span><strong id="silverWeeklyAvg">--</strong><small id="silverWeeklyDiff">--</small></div>
+                        <div class="metric"><span>Monthly Avg</span><strong id="silverMonthlyAvg">--</strong><small id="silverMonthlyDiff">--</small></div>
+                        <div class="metric"><span>RSI 14</span><strong id="silverRSI">--</strong></div>
+                        <div class="metric"><span>Bollinger</span><strong id="silverBoll">--</strong></div>
+                        <div class="metric"><span>SMA20 Dist</span><strong id="silverSMA20">--</strong></div>
+                    </div>
+
+                    <details class="reasoning-box">
+                        <summary>Detailed Reasoning</summary>
+                        <p id="silverReasoning"></p>
+                    </details>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
         <!-- ======== TABLE ======== -->
         <div class="card mt-10">
             <h2 class="table-title">Price Table</h2>
 
-            <div class="overflow-x-auto">
+            <div class="data-table-container overflow-x-auto">
                 <table class="data-table">
                     <thead>
                         <tr>
@@ -76,6 +157,16 @@
         </div>
 
     </div>
+
+    <!-- FOOTER -->
+    <footer class="footer-bar mt-12 py-6">
+        <div class="max-w-7xl mx-auto text-center text-sm footer-text px-4">
+            <strong>Disclaimer:</strong>  
+            This dashboard is for educational and personal use only.  
+            Do not use this data for trading, financial decisions, or commercial purposes.  
+            No accuracy or reliability is guaranteed.
+        </div>
+    </footer>
 
     <!-- Custom JS -->
     <script src="static/script.js"></script>

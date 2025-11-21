@@ -23,10 +23,22 @@ body {
     margin-bottom: 12px;
 }
 
+.top-latest-update {
+    width: 100%;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #333;
+    background: #fff7d6;         /* soft gold highlight */
+    border-bottom: 1px solid #f1e3b3;
+    margin-bottom: 20px;
+}
 
 /* =========================================================
    BANNERS (Glassmorphism)
    ========================================================= */
+
 
 .banner-card {
     position: relative;
@@ -93,6 +105,7 @@ body {
 }
 
 
+
 /* =========================================================
    RANGE BUTTONS
    ========================================================= */
@@ -116,11 +129,158 @@ body {
 }
 
 
+/* ===========================
+    METAL BUY TILES
+============================== */
+
+.metal-pair {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.metal-tile {
+    flex: 1;
+    min-width: 300px;
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.metal-header {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.gold-header {
+    color: #d4a017; /* gold tone */
+}
+
+.silver-header {
+    color: #708090; /* silver tone */
+}
+
+/* Score card */
+.score-card {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.score-value {
+    font-size: 2.8rem;
+    font-weight: 800;
+}
+
+.meter-bar {
+    width: 100%;
+    height: 12px;
+    background: #eee;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 8px 0;
+}
+
+.meter-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg,#4caf50,#ffeb3b,#ff5722);
+    transition: width .6s ease;
+}
+
+.rec-text {
+    font-weight: 600;
+    color: #444;
+}
+
+/* Metrics grid */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px,1fr));
+    gap: 14px;
+    margin-bottom: 10px;
+}
+
+.metric span {
+    display: block;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.metric strong {
+    font-size: 1.2rem;
+    color: #222;
+}
+
+.metric small {
+    display: block;
+    font-size: 0.8rem;
+    color: #777;
+}
+
+/* Reasoning */
+.reasoning-box summary {
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.reasoning-box p {
+    margin-top: 10px;
+    color:#444;
+    line-height: 1.4;
+}
+/* Header bar for Buy Insights */
+.insight-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.insights-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #222;
+}
+
+.latest-date {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #555;
+}
+
+/* Pct color coding */
+.pct-pos {
+    color: #4caf50;   /* green */
+    font-weight: 600;
+}
+
+.pct-neg {
+    color: #f44336;   /* red */
+    font-weight: 600;
+}
+
+.pct-zero {
+    color: #999;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .metal-pair {
+        flex-direction: column;
+    }
+}
+
+
+
 /* =========================================================
    TABLE STYLING
    ========================================================= */
 .data-table {
-    width: 100%;
+    width: 80%;
     border-collapse: collapse;
     min-width: 400px;
 }
@@ -158,6 +318,56 @@ body {
 
 .full-btn:hover {
     background: #059669;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.header-bar {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.header-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.github-link {
+    font-weight: 600;
+    color: #2563eb;
+    transition: 0.2s ease;
+}
+
+.github-link:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.footer-bar {
+    background: #f3f4f6;
+}
+
+.footer-text {
+    color: #4b5563;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   TABLE WIDTH (DESKTOP)
+   ========================================================= */
+@media (min-width: 1024px) {
+    .data-table-container {
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 

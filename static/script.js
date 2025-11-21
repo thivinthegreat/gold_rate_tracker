@@ -233,6 +233,91 @@ function loadRange(days, btn = null) {
     buildTable(data);
 }
 
+/* ============================================================================
+   7) DECISION METRICS HANDLER
+============================================================================ */
+async function loadBuyInsights() {
+    try {
+        const resp = await fetch("data/decision.json");
+        const data = await resp.json();
+
+        const gold = data.gold;
+        const silver = data.silver;
+
+        document.getElementById("latestDate").textContent = "Latest Date: " + data.gold.date;
+        document.getElementById("topLatestUpdate").textContent =
+    "📅 Latest Update: " + data.gold.date;
+
+
+
+        // ------------ GOLD ------------
+        document.getElementById("goldScoreValue").textContent = gold.buy_score;
+        document.getElementById("goldMeterFill").style.width = gold.buy_score + "%";
+
+        document.getElementById("goldRecommendation").textContent = gold.recommendation;
+
+        document.getElementById("goldWeeklyAvg").textContent = gold.weekly_avg;
+        document.getElementById("goldWeeklyDiff").innerHTML = coloredPct(gold.weekly_difference_pct);
+        
+        
+
+
+        document.getElementById("goldMonthlyAvg").textContent = gold.monthly_avg;
+        document.getElementById("goldMonthlyDiff").innerHTML = coloredPct(gold.monthly_difference_pct);
+
+        document.getElementById("goldRSI").textContent = gold.rsi14;
+        document.getElementById("goldBoll").textContent = gold.boll_position_pct + "%";
+        document.getElementById("goldSMA20").innerHTML = coloredPct(gold.sma20_distance_pct);
+
+        document.getElementById("goldReasoning").textContent = gold.reasoning;
+
+
+        // ------------ SILVER ------------
+        document.getElementById("silverScoreValue").textContent = silver.buy_score;
+        document.getElementById("silverMeterFill").style.width = silver.buy_score + "%";
+
+        document.getElementById("silverRecommendation").textContent = silver.recommendation;
+
+        document.getElementById("silverWeeklyAvg").textContent = silver.weekly_avg;
+        document.getElementById("silverWeeklyDiff").innerHTML = coloredPct(silver.weekly_difference_pct);
+        
+
+
+
+
+        document.getElementById("silverMonthlyAvg").textContent = silver.monthly_avg;
+        document.getElementById("silverMonthlyDiff").innerHTML = coloredPct(silver.monthly_difference_pct);
+
+        document.getElementById("silverRSI").textContent = silver.rsi14;
+        document.getElementById("silverBoll").textContent = silver.boll_position_pct + "%";
+        document.getElementById("silverSMA20").innerHTML = coloredPct(silver.sma20_distance_pct);
+
+        document.getElementById("silverReasoning").textContent = silver.reasoning;
+
+
+    } catch (err) {
+        console.error("Insights load failed:", err);
+    }
+}
+
+function formatPct(val) {
+    if (val == null) return "--";
+    return (val >= 0 ? "+" : "") + val + "%";
+}
+
+function coloredPct(val) {
+    if (val == null) return "--";
+    
+    const arrow = val > 0 ? "↑" : (val < 0 ? "↓" : "→");
+    const cls = val > 0 ? "pct-pos" : (val < 0 ? "pct-neg" : "pct-zero");
+
+    return `<span class="${cls}">${arrow} ${val}%</span>`;
+}
+
+document.addEventListener("DOMContentLoaded", loadBuyInsights);
+
+
+
 
 /* ============================================================================
    7) FULL HISTORY TABLE LOADER
