@@ -82,7 +82,7 @@ html = f"""
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="static/style.css" />
+    <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 
@@ -239,7 +239,7 @@ html = f"""
     </footer>
 
     <!-- Custom JS -->
-    <script src="static/script.js"></script>
+   <script src="assets/js/script.js" defer></script>
 
 </body>
 </html>
