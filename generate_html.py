@@ -74,6 +74,7 @@ html = f"""
 <head>
     <meta charset="UTF-8" />
     <title>Gold & Silver Dashboard</title>
+    <link rel="icon" href="/gold_rate_tracker/assets/img/gold.svg">
 
     <!-- TailwindCSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -82,7 +83,7 @@ html = f"""
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/gold_rate_tracker/assets/css/style.css">
 
 </head>
 
@@ -239,7 +240,7 @@ html = f"""
     </footer>
 
     <!-- Custom JS -->
-   <script src="assets/js/script.js" defer></script>
+   <script src="/gold_rate_tracker/assets/js/script.js" defer></script>
 
 </body>
 </html>

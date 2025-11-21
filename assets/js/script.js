@@ -76,7 +76,7 @@ function buildBanners() {
                 <div class="text-sm opacity-80">Prev: ₹${s.gold_prev}</div>
                 <div class="text-sm opacity-80">Weekly Avg: ₹${s.gold_weekly ?? "-"}</div>
             </div>
-            <img src="assets/img/gold.svg" class="banner-icon"/>
+            <img src="/gold_rate_tracker/assets/img/gold.svg" class="banner-icon"/>
         </div>
 
 
@@ -93,7 +93,7 @@ function buildBanners() {
                 <div class="text-sm opacity-80">Prev: ₹${s.silver_prev}</div>
                 <div class="text-sm opacity-80">Weekly Avg: ₹${s.silver_weekly ?? "-"}</div>
             </div>
-            <img src="assets/img/silver.svg" class="banner-icon"/>
+            <img src="/gold_rate_tracker/assets/img/silver.svg" class="banner-icon"/>
         </div>
 
     `;
