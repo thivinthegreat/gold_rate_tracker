@@ -1,5 +1,34 @@
 {
   "1": {
+    "date": "24/11/2025",
+    "gold": 11520,
+    "silver": 171,
+    "sma7_gold": 11507.14,
+    "sma20_gold": 11468.0,
+    "sma30_gold": 11471.33,
+    "ema12_gold": 11522.82,
+    "ema26_gold": 11467.54,
+    "macd_gold": 55.27,
+    "macd_signal_gold": 65.81,
+    "macd_hist_gold": -10.53,
+    "rsi14_gold": 57.67,
+    "boll_sma20_gold": NaN,
+    "boll_upper_gold": 11839.38,
+    "boll_lower_gold": 11096.62,
+    "sma7_silver": 171.57,
+    "sma20_silver": 170.2,
+    "sma30_silver": 170.6,
+    "ema12_silver": 171.76,
+    "ema26_silver": 171.5,
+    "macd_silver": 0.26,
+    "macd_signal_silver": 0.33,
+    "macd_hist_silver": -0.08,
+    "rsi14_silver": 57.5,
+    "boll_sma20_silver": NaN,
+    "boll_upper_silver": 180.45,
+    "boll_lower_silver": 159.95
+  },
+  "2": {
     "date": "22/11/2025",
     "gold": 11630,
     "silver": 172,
@@ -28,7 +57,7 @@
     "boll_upper_silver": 180.4,
     "boll_lower_silver": 159.4
   },
-  "2": {
+  "3": {
     "date": "21/11/2025",
     "gold": 11460,
     "silver": 169,
@@ -57,7 +86,7 @@
     "boll_upper_silver": 180.22,
     "boll_lower_silver": 158.88
   },
-  "3": {
+  "4": {
     "date": "20/11/2025",
     "gold": 11500,
     "silver": 173,
@@ -86,7 +115,7 @@
     "boll_upper_silver": 180.19,
     "boll_lower_silver": 158.61
   },
-  "4": {
+  "5": {
     "date": "19/11/2025",
     "gold": 11500,
     "silver": 173,
@@ -115,7 +144,7 @@
     "boll_upper_silver": 179.82,
     "boll_lower_silver": 158.18
   },
-  "5": {
+  "6": {
     "date": "18/11/2025",
     "gold": 11400,
     "silver": 170,
@@ -144,7 +173,7 @@
     "boll_upper_silver": 179.52,
     "boll_lower_silver": 158.18
   },
-  "6": {
+  "7": {
     "date": "17/11/2025",
     "gold": 11540,
     "silver": 173,
@@ -172,34 +201,5 @@
     "boll_sma20_silver": 168.85,
     "boll_upper_silver": 179.52,
     "boll_lower_silver": 158.18
-  },
-  "7": {
-    "date": "15/11/2025",
-    "gold": 11550,
-    "silver": 175,
-    "sma7_gold": 11600.0,
-    "sma20_gold": 11410.5,
-    "sma30_gold": 11559.0,
-    "ema12_gold": 11537.48,
-    "ema26_gold": 11436.35,
-    "macd_gold": 101.13,
-    "macd_signal_gold": 77.68,
-    "macd_hist_gold": 23.45,
-    "rsi14_gold": 64.33,
-    "boll_sma20_gold": 11410.5,
-    "boll_upper_gold": 11824.24,
-    "boll_lower_gold": 10996.76,
-    "sma7_silver": 173.14,
-    "sma20_silver": 168.75,
-    "sma30_silver": 177.13,
-    "ema12_silver": 172.48,
-    "ema26_silver": 171.5,
-    "macd_silver": 0.98,
-    "macd_signal_silver": -0.2,
-    "macd_hist_silver": 1.17,
-    "rsi14_silver": 64.71,
-    "boll_sma20_silver": 168.75,
-    "boll_upper_silver": 179.29,
-    "boll_lower_silver": 158.21
   }
 }
