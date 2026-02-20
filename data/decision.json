@@ -1,30 +1,30 @@
 {
   "gold": {
-    "date": "19/02/2026",
-    "price": 14500,
-    "weekly_avg": 14435.71,
-    "monthly_avg": 14504.17,
-    "weekly_difference_pct": 0.45,
-    "monthly_difference_pct": -0.03,
-    "sma20_distance_pct": -1.31,
-    "boll_position_pct": 43.13,
-    "rsi14": 57.28,
-    "buy_score": 25,
+    "date": "20/02/2026",
+    "price": 14420,
+    "weekly_avg": 14410.0,
+    "monthly_avg": 14543.83,
+    "weekly_difference_pct": 0.07,
+    "monthly_difference_pct": -0.85,
+    "sma20_distance_pct": -1.55,
+    "boll_position_pct": 41.73,
+    "rsi14": 40.16,
+    "buy_score": 35,
     "recommendation": "Avoid (Expensive)",
-    "reasoning": "Price is above weekly average. Price is slightly below monthly average. RSI neutral. Mid Bollinger range (fair). Price below SMA20 (undervalued trend)."
+    "reasoning": "Price is above weekly average. Price is slightly below monthly average. RSI mildly undervalued. Mid Bollinger range (fair). Price below SMA20 (undervalued trend)."
   },
   "silver": {
-    "date": "19/02/2026",
+    "date": "20/02/2026",
     "price": 270,
-    "weekly_avg": 274.29,
-    "monthly_avg": 319.87,
-    "weekly_difference_pct": -1.56,
-    "monthly_difference_pct": -15.59,
-    "sma20_distance_pct": -12.55,
-    "boll_position_pct": 30.52,
-    "rsi14": 46.67,
-    "buy_score": 65,
+    "weekly_avg": 270.0,
+    "monthly_avg": 318.67,
+    "weekly_difference_pct": 0.0,
+    "monthly_difference_pct": -15.27,
+    "sma20_distance_pct": -10.67,
+    "boll_position_pct": 32.28,
+    "rsi14": 27.27,
+    "buy_score": 70,
     "recommendation": "Fair Price",
-    "reasoning": "Price is well below weekly average. Price is well below monthly average. RSI neutral. Lower half of Bollinger range. Price below SMA20 (undervalued trend)."
+    "reasoning": "Price is above weekly average. Price is well below monthly average. RSI indicates oversold conditions. Lower half of Bollinger range. Price below SMA20 (undervalued trend)."
   }
 }
