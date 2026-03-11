@@ -1,30 +1,30 @@
 {
   "gold": {
-    "date": "10/03/2026",
-    "price": 15050,
-    "weekly_avg": 15140.0,
-    "monthly_avg": 14798.5,
-    "weekly_difference_pct": -0.59,
-    "monthly_difference_pct": 1.7,
-    "sma20_distance_pct": 0.58,
-    "boll_position_pct": 55.18,
-    "rsi14": 54.57,
-    "buy_score": 10,
-    "recommendation": "Avoid (Expensive)",
-    "reasoning": "Price is slightly below weekly average. Price is above monthly average. RSI neutral. Mid Bollinger range (fair). Above SMA20 (higher valuation)."
-  },
-  "silver": {
-    "date": "10/03/2026",
-    "price": 300,
-    "weekly_avg": 296.43,
-    "monthly_avg": 291.17,
-    "weekly_difference_pct": 1.2,
-    "monthly_difference_pct": 3.03,
-    "sma20_distance_pct": 2.65,
-    "boll_position_pct": 61.8,
-    "rsi14": 50.0,
+    "date": "11/03/2026",
+    "price": 15120,
+    "weekly_avg": 15064.29,
+    "monthly_avg": 14825.17,
+    "weekly_difference_pct": 0.37,
+    "monthly_difference_pct": 1.99,
+    "sma20_distance_pct": 0.78,
+    "boll_position_pct": 57.46,
+    "rsi14": 55.42,
     "buy_score": 0,
     "recommendation": "Avoid (Expensive)",
-    "reasoning": "Price is above weekly average. Price is above monthly average. RSI neutral. Near upper Bollinger band (expensive). Above SMA20 (higher valuation)."
+    "reasoning": "Price is above weekly average. Price is above monthly average. RSI neutral. Mid Bollinger range (fair). Above SMA20 (higher valuation)."
+  },
+  "silver": {
+    "date": "11/03/2026",
+    "price": 300,
+    "weekly_avg": 294.29,
+    "monthly_avg": 291.17,
+    "weekly_difference_pct": 1.94,
+    "monthly_difference_pct": 3.03,
+    "sma20_distance_pct": 2.04,
+    "boll_position_pct": 59.88,
+    "rsi14": 56.25,
+    "buy_score": 0,
+    "recommendation": "Avoid (Expensive)",
+    "reasoning": "Price is above weekly average. Price is above monthly average. RSI neutral. Mid Bollinger range (fair). Above SMA20 (higher valuation)."
   }
 }
