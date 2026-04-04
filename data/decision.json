@@ -1,30 +1,30 @@
 {
   "gold": {
-    "date": "03/04/2026",
-    "price": 13850,
-    "weekly_avg": 13744.29,
-    "monthly_avg": 14413.17,
-    "weekly_difference_pct": 0.77,
-    "monthly_difference_pct": -3.91,
-    "sma20_distance_pct": -1.02,
-    "boll_position_pct": 44.08,
-    "rsi14": 39.77,
-    "buy_score": 45,
-    "recommendation": "Slightly Expensive",
-    "reasoning": "Price is above weekly average. Price is well below monthly average. RSI mildly undervalued. Mid Bollinger range (fair). Price below SMA20 (undervalued trend)."
+    "date": "04/04/2026",
+    "price": 13950,
+    "weekly_avg": 13818.57,
+    "monthly_avg": 14352.33,
+    "weekly_difference_pct": 0.95,
+    "monthly_difference_pct": -2.8,
+    "sma20_distance_pct": 0.06,
+    "boll_position_pct": 50.36,
+    "rsi14": 44.78,
+    "buy_score": 30,
+    "recommendation": "Avoid (Expensive)",
+    "reasoning": "Price is above weekly average. Price is well below monthly average. RSI mildly undervalued. Mid Bollinger range (fair). Above SMA20 (higher valuation)."
   },
   "silver": {
-    "date": "03/04/2026",
+    "date": "04/04/2026",
     "price": 255,
-    "weekly_avg": 252.86,
-    "monthly_avg": 274.87,
-    "weekly_difference_pct": 0.85,
-    "monthly_difference_pct": -7.23,
-    "sma20_distance_pct": -2.5,
-    "boll_position_pct": 39.68,
-    "rsi14": 40.91,
-    "buy_score": 55,
-    "recommendation": "Fair Price",
-    "reasoning": "Price is above weekly average. Price is well below monthly average. RSI mildly undervalued. Lower half of Bollinger range. Price below SMA20 (undervalued trend)."
+    "weekly_avg": 254.29,
+    "monthly_avg": 272.53,
+    "weekly_difference_pct": 0.28,
+    "monthly_difference_pct": -6.43,
+    "sma20_distance_pct": -1.85,
+    "boll_position_pct": 41.68,
+    "rsi14": 45.0,
+    "buy_score": 35,
+    "recommendation": "Avoid (Expensive)",
+    "reasoning": "Price is above weekly average. Price is well below monthly average. RSI neutral. Mid Bollinger range (fair). Price below SMA20 (undervalued trend)."
   }
 }
