@@ -1,30 +1,30 @@
 {
   "gold": {
-    "date": "08/04/2026",
-    "price": 14200,
-    "weekly_avg": 13952.86,
-    "monthly_avg": 14197.67,
-    "weekly_difference_pct": 1.77,
-    "monthly_difference_pct": 0.02,
-    "sma20_distance_pct": 2.77,
-    "boll_position_pct": 72.24,
-    "rsi14": 74.7,
-    "buy_score": 0,
+    "date": "09/04/2026",
+    "price": 14000,
+    "weekly_avg": 13945.71,
+    "monthly_avg": 14160.33,
+    "weekly_difference_pct": 0.39,
+    "monthly_difference_pct": -1.13,
+    "sma20_distance_pct": 1.56,
+    "boll_position_pct": 63.94,
+    "rsi14": 68.66,
+    "buy_score": 20,
     "recommendation": "Avoid (Expensive)",
-    "reasoning": "Price is above weekly average. Price is above monthly average. RSI indicates overbought conditions. Near upper Bollinger band (expensive). Above SMA20 (higher valuation)."
+    "reasoning": "Price is above weekly average. Price is well below monthly average. RSI indicates overbought conditions. Near upper Bollinger band (expensive). Above SMA20 (higher valuation)."
   },
   "silver": {
-    "date": "08/04/2026",
-    "price": 265,
-    "weekly_avg": 257.86,
-    "monthly_avg": 267.53,
-    "weekly_difference_pct": 2.77,
-    "monthly_difference_pct": -0.95,
-    "sma20_distance_pct": 3.41,
-    "boll_position_pct": 70.36,
-    "rsi14": 68.75,
-    "buy_score": 10,
+    "date": "09/04/2026",
+    "price": 260,
+    "weekly_avg": 257.14,
+    "monthly_avg": 266.37,
+    "weekly_difference_pct": 1.11,
+    "monthly_difference_pct": -2.39,
+    "sma20_distance_pct": 1.86,
+    "boll_position_pct": 62.84,
+    "rsi14": 62.5,
+    "buy_score": 20,
     "recommendation": "Avoid (Expensive)",
-    "reasoning": "Price is above weekly average. Price is slightly below monthly average. RSI indicates overbought conditions. Near upper Bollinger band (expensive). Above SMA20 (higher valuation)."
+    "reasoning": "Price is above weekly average. Price is well below monthly average. RSI indicates overbought conditions. Near upper Bollinger band (expensive). Above SMA20 (higher valuation)."
   }
 }
