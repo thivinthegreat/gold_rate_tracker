@@ -1,30 +1,30 @@
 {
   "gold": {
-    "date": "29/04/2026",
-    "price": 13950,
-    "weekly_avg": 14141.43,
-    "monthly_avg": 14034.83,
-    "weekly_difference_pct": -1.35,
-    "monthly_difference_pct": -0.6,
-    "sma20_distance_pct": -1.55,
-    "boll_position_pct": 9.24,
-    "rsi14": 45.67,
-    "buy_score": 65,
-    "recommendation": "Fair Price",
-    "reasoning": "Price is well below weekly average. Price is slightly below monthly average. RSI neutral. Near lower Bollinger band (cheap zone). Price below SMA20 (undervalued trend)."
+    "date": "30/04/2026",
+    "price": 13900,
+    "weekly_avg": 14091.43,
+    "monthly_avg": 14042.5,
+    "weekly_difference_pct": -1.36,
+    "monthly_difference_pct": -1.01,
+    "sma20_distance_pct": -1.92,
+    "boll_position_pct": -2.17,
+    "rsi14": 36.21,
+    "buy_score": 85,
+    "recommendation": "Good Time To Buy",
+    "reasoning": "Price is well below weekly average. Price is well below monthly average. RSI mildly undervalued. Near lower Bollinger band (cheap zone). Price below SMA20 (undervalued trend)."
   },
   "silver": {
-    "date": "29/04/2026",
-    "price": 265,
-    "weekly_avg": 268.57,
+    "date": "30/04/2026",
+    "price": 260,
+    "weekly_avg": 266.43,
     "monthly_avg": 263.83,
-    "weekly_difference_pct": -1.33,
-    "monthly_difference_pct": 0.44,
-    "sma20_distance_pct": -1.4,
-    "boll_position_pct": 36.33,
-    "rsi14": 55.56,
-    "buy_score": 45,
-    "recommendation": "Slightly Expensive",
-    "reasoning": "Price is well below weekly average. Price is above monthly average. RSI neutral. Lower half of Bollinger range. Price below SMA20 (undervalued trend)."
+    "weekly_difference_pct": -2.41,
+    "monthly_difference_pct": -1.45,
+    "sma20_distance_pct": -3.35,
+    "boll_position_pct": 14.87,
+    "rsi14": 44.44,
+    "buy_score": 85,
+    "recommendation": "Good Time To Buy",
+    "reasoning": "Price is well below weekly average. Price is well below monthly average. RSI mildly undervalued. Near lower Bollinger band (cheap zone). Price below SMA20 (undervalued trend)."
   }
 }
