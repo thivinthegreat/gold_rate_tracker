@@ -1,30 +1,30 @@
 {
   "gold": {
-    "date": "13/07/2026",
-    "price": 13200,
-    "weekly_avg": 13337.14,
-    "monthly_avg": 13546.0,
-    "weekly_difference_pct": -1.03,
-    "monthly_difference_pct": -2.55,
-    "sma20_distance_pct": -1.28,
-    "boll_position_pct": 28.05,
-    "rsi14": 49.48,
+    "date": "14/07/2026",
+    "price": 13150,
+    "weekly_avg": 13278.57,
+    "monthly_avg": 13511.0,
+    "weekly_difference_pct": -0.97,
+    "monthly_difference_pct": -2.67,
+    "sma20_distance_pct": -1.49,
+    "boll_position_pct": 24.3,
+    "rsi14": 43.96,
     "buy_score": 65,
     "recommendation": "Fair Price",
-    "reasoning": "Price is well below weekly average. Price is well below monthly average. RSI neutral. Lower half of Bollinger range. Price below SMA20 (undervalued trend)."
+    "reasoning": "Price is slightly below weekly average. Price is well below monthly average. RSI mildly undervalued. Lower half of Bollinger range. Price below SMA20 (undervalued trend)."
   },
   "silver": {
-    "date": "13/07/2026",
-    "price": 240,
-    "weekly_avg": 245.0,
-    "monthly_avg": 253.5,
-    "weekly_difference_pct": -2.04,
-    "monthly_difference_pct": -5.33,
-    "sma20_distance_pct": -2.54,
-    "boll_position_pct": 29.86,
-    "rsi14": 54.55,
-    "buy_score": 65,
-    "recommendation": "Fair Price",
-    "reasoning": "Price is well below weekly average. Price is well below monthly average. RSI neutral. Lower half of Bollinger range. Price below SMA20 (undervalued trend)."
+    "date": "14/07/2026",
+    "price": 235,
+    "weekly_avg": 242.86,
+    "monthly_avg": 252.33,
+    "weekly_difference_pct": -3.24,
+    "monthly_difference_pct": -6.87,
+    "sma20_distance_pct": -4.18,
+    "boll_position_pct": 17.4,
+    "rsi14": 40.0,
+    "buy_score": 85,
+    "recommendation": "Good Time To Buy",
+    "reasoning": "Price is well below weekly average. Price is well below monthly average. RSI mildly undervalued. Near lower Bollinger band (cheap zone). Price below SMA20 (undervalued trend)."
   }
 }
