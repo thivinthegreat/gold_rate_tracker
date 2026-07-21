@@ -1,30 +1,30 @@
 {
   "gold": {
-    "date": "20/07/2026",
-    "price": 13150,
-    "weekly_avg": 13152.14,
-    "monthly_avg": 13400.5,
-    "weekly_difference_pct": -0.02,
-    "monthly_difference_pct": -1.87,
-    "sma20_distance_pct": -1.06,
-    "boll_position_pct": 31.51,
-    "rsi14": 21.65,
-    "buy_score": 80,
-    "recommendation": "Good Time To Buy",
-    "reasoning": "Price is slightly below weekly average. Price is well below monthly average. RSI indicates oversold conditions. Lower half of Bollinger range. Price below SMA20 (undervalued trend)."
+    "date": "21/07/2026",
+    "price": 13220,
+    "weekly_avg": 13155.0,
+    "monthly_avg": 13372.5,
+    "weekly_difference_pct": 0.49,
+    "monthly_difference_pct": -1.14,
+    "sma20_distance_pct": -0.48,
+    "boll_position_pct": 41.64,
+    "rsi14": 26.92,
+    "buy_score": 53,
+    "recommendation": "Slightly Expensive",
+    "reasoning": "Price is above weekly average. Price is well below monthly average. RSI indicates oversold conditions. Mid Bollinger range (fair). Slightly below SMA20."
   },
   "silver": {
-    "date": "20/07/2026",
-    "price": 235,
+    "date": "21/07/2026",
+    "price": 240,
     "weekly_avg": 237.14,
-    "monthly_avg": 247.33,
-    "weekly_difference_pct": -0.9,
-    "monthly_difference_pct": -4.99,
-    "sma20_distance_pct": -3.69,
-    "boll_position_pct": 19.45,
-    "rsi14": 14.29,
-    "buy_score": 90,
-    "recommendation": "Good Time To Buy",
-    "reasoning": "Price is slightly below weekly average. Price is well below monthly average. RSI indicates oversold conditions. Near lower Bollinger band (cheap zone). Price below SMA20 (undervalued trend)."
+    "monthly_avg": 246.17,
+    "weekly_difference_pct": 1.21,
+    "monthly_difference_pct": -2.51,
+    "sma20_distance_pct": -1.54,
+    "boll_position_pct": 37.35,
+    "rsi14": 25.0,
+    "buy_score": 70,
+    "recommendation": "Fair Price",
+    "reasoning": "Price is above weekly average. Price is well below monthly average. RSI indicates oversold conditions. Lower half of Bollinger range. Price below SMA20 (undervalued trend)."
   }
 }
