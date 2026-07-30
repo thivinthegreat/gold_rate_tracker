@@ -1,30 +1,30 @@
 {
   "gold": {
-    "date": "29/07/2026",
-    "price": 13155,
-    "weekly_avg": 13314.29,
-    "monthly_avg": 13286.83,
-    "weekly_difference_pct": -1.2,
-    "monthly_difference_pct": -0.99,
-    "sma20_distance_pct": -0.75,
-    "boll_position_pct": 27.85,
-    "rsi14": 48.1,
-    "buy_score": 48,
-    "recommendation": "Slightly Expensive",
-    "reasoning": "Price is well below weekly average. Price is slightly below monthly average. RSI neutral. Lower half of Bollinger range. Slightly below SMA20."
+    "date": "30/07/2026",
+    "price": 13230,
+    "weekly_avg": 13285.71,
+    "monthly_avg": 13289.83,
+    "weekly_difference_pct": -0.42,
+    "monthly_difference_pct": -0.45,
+    "sma20_distance_pct": -0.12,
+    "boll_position_pct": 46.31,
+    "rsi14": 53.31,
+    "buy_score": 28,
+    "recommendation": "Avoid (Expensive)",
+    "reasoning": "Price is slightly below weekly average. Price is slightly below monthly average. RSI neutral. Mid Bollinger range (fair). Slightly below SMA20."
   },
   "silver": {
-    "date": "29/07/2026",
+    "date": "30/07/2026",
     "price": 235,
-    "weekly_avg": 240.0,
-    "monthly_avg": 242.17,
-    "weekly_difference_pct": -2.08,
-    "monthly_difference_pct": -2.96,
-    "sma20_distance_pct": -2.19,
-    "boll_position_pct": 20.41,
-    "rsi14": 42.86,
-    "buy_score": 75,
-    "recommendation": "Good Time To Buy",
-    "reasoning": "Price is well below weekly average. Price is well below monthly average. RSI mildly undervalued. Lower half of Bollinger range. Price below SMA20 (undervalued trend)."
+    "weekly_avg": 238.57,
+    "monthly_avg": 242.33,
+    "weekly_difference_pct": -1.5,
+    "monthly_difference_pct": -3.02,
+    "sma20_distance_pct": -1.88,
+    "boll_position_pct": 21.45,
+    "rsi14": 50.0,
+    "buy_score": 65,
+    "recommendation": "Fair Price",
+    "reasoning": "Price is well below weekly average. Price is well below monthly average. RSI neutral. Lower half of Bollinger range. Price below SMA20 (undervalued trend)."
   }
 }
