@@ -1,30 +1,30 @@
 {
   "gold": {
-    "date": "04/09/2026",
-    "price": 14360,
-    "weekly_avg": 14351.43,
-    "monthly_avg": 14228.33,
-    "weekly_difference_pct": 0.06,
-    "monthly_difference_pct": 0.93,
-    "sma20_distance_pct": -0.95,
-    "boll_position_pct": 39.98,
-    "rsi14": 53.3,
-    "buy_score": 18,
-    "recommendation": "Avoid (Expensive)",
-    "reasoning": "Price is above weekly average. Price is above monthly average. RSI neutral. Lower half of Bollinger range. Slightly below SMA20."
+    "date": "05/09/2026",
+    "price": 14190,
+    "weekly_avg": 14285.71,
+    "monthly_avg": 14260.67,
+    "weekly_difference_pct": -0.67,
+    "monthly_difference_pct": -0.5,
+    "sma20_distance_pct": -2.11,
+    "boll_position_pct": 27.82,
+    "rsi14": 40.33,
+    "buy_score": 55,
+    "recommendation": "Fair Price",
+    "reasoning": "Price is slightly below weekly average. Price is slightly below monthly average. RSI mildly undervalued. Lower half of Bollinger range. Price below SMA20 (undervalued trend)."
   },
   "silver": {
-    "date": "04/09/2026",
+    "date": "05/09/2026",
     "price": 255,
-    "weekly_avg": 256.43,
-    "monthly_avg": 255.17,
-    "weekly_difference_pct": -0.56,
-    "monthly_difference_pct": -0.07,
-    "sma20_distance_pct": -1.73,
-    "boll_position_pct": 32.61,
-    "rsi14": 54.55,
-    "buy_score": 45,
-    "recommendation": "Slightly Expensive",
-    "reasoning": "Price is slightly below weekly average. Price is slightly below monthly average. RSI neutral. Lower half of Bollinger range. Price below SMA20 (undervalued trend)."
+    "weekly_avg": 255.71,
+    "monthly_avg": 255.83,
+    "weekly_difference_pct": -0.28,
+    "monthly_difference_pct": -0.32,
+    "sma20_distance_pct": -1.64,
+    "boll_position_pct": 33.77,
+    "rsi14": 44.44,
+    "buy_score": 55,
+    "recommendation": "Fair Price",
+    "reasoning": "Price is slightly below weekly average. Price is slightly below monthly average. RSI mildly undervalued. Lower half of Bollinger range. Price below SMA20 (undervalued trend)."
   }
 }
