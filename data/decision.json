@@ -1,30 +1,30 @@
 {
   "gold": {
-    "date": "17/10/2026",
-    "price": 13535,
-    "weekly_avg": 13651.43,
-    "monthly_avg": 13855.17,
-    "weekly_difference_pct": -0.85,
-    "monthly_difference_pct": -2.31,
-    "sma20_distance_pct": -1.34,
-    "boll_position_pct": 16.94,
-    "rsi14": 41.1,
-    "buy_score": 75,
-    "recommendation": "Good Time To Buy",
-    "reasoning": "Price is slightly below weekly average. Price is well below monthly average. RSI mildly undervalued. Near lower Bollinger band (cheap zone). Price below SMA20 (undervalued trend)."
+    "date": "19/10/2026",
+    "price": 13570,
+    "weekly_avg": 13607.14,
+    "monthly_avg": 13836.67,
+    "weekly_difference_pct": -0.27,
+    "monthly_difference_pct": -1.93,
+    "sma20_distance_pct": -0.93,
+    "boll_position_pct": 24.55,
+    "rsi14": 36.42,
+    "buy_score": 58,
+    "recommendation": "Fair Price",
+    "reasoning": "Price is slightly below weekly average. Price is well below monthly average. RSI mildly undervalued. Lower half of Bollinger range. Slightly below SMA20."
   },
   "silver": {
-    "date": "17/10/2026",
+    "date": "19/10/2026",
     "price": 240,
-    "weekly_avg": 242.86,
-    "monthly_avg": 247.33,
-    "weekly_difference_pct": -1.18,
-    "monthly_difference_pct": -2.96,
-    "sma20_distance_pct": -1.74,
-    "boll_position_pct": 13.8,
-    "rsi14": 50.0,
-    "buy_score": 75,
+    "weekly_avg": 242.14,
+    "monthly_avg": 247.0,
+    "weekly_difference_pct": -0.88,
+    "monthly_difference_pct": -2.83,
+    "sma20_distance_pct": -1.54,
+    "boll_position_pct": 15.91,
+    "rsi14": 0.0,
+    "buy_score": 90,
     "recommendation": "Good Time To Buy",
-    "reasoning": "Price is well below weekly average. Price is well below monthly average. RSI neutral. Near lower Bollinger band (cheap zone). Price below SMA20 (undervalued trend)."
+    "reasoning": "Price is slightly below weekly average. Price is well below monthly average. RSI indicates oversold conditions. Near lower Bollinger band (cheap zone). Price below SMA20 (undervalued trend)."
   }
 }
